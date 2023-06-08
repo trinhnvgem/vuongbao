@@ -359,15 +359,23 @@ jQuery(document).ready(function($)
             					var page_total = $('.page_total');
             					var totalPagination = Math.ceil($('.product-item').length / numSortingText);
             					page_total.text(totalPagination);
+            					var page_selection = $('.page_selection');
+            					// add <li><a href="#">{}</a></li> to page_selection
+            					var page_selection_html = '';
+            					for (var i = 1; i <= totalPagination; i++) {
+            						page_selection_html += '<li><a href="#">' + i + '</a></li>';
+            					}
+            					page_selection.html(page_selection_html);
+            
             					// set Request.QueryString["sizePage"] = numSortingText; in 
             					// set to url when click
             					var url = window.location.href;
-            					// add sizePage to url
-            					var newUrl = url + "&sizePage=" + numSortingText;
+            					// reset and add sizePage to url
+            					var newUrl = url.split('?')[0] + '?sizePage=' + numSortingText;
             					// set url
             					window.history.pushState("object or string", "Title", newUrl);
             	        	});
-            	        });
+            	        });	
 
 	        // Filter based on the price range slider
 	        filterButton.on('click', function()
