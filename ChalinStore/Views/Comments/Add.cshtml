@@ -1,0 +1,52 @@
+﻿@*@model ChalinStore.Models.EF.Comments*@
+<!--@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-6 add_review_col">
+    @using (Html.BeginForm("Add", "News", FormMethod.Post, new { }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="add_review">
+            <form id="review_form" action="post">
+                <div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mô tả</label>
+                        Html.TextAreaFor(x => x.CommentDate, new { class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mô tả</label>
+                        Html.TextAreaFor(x => x.ProductId, new { class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mô tả</label>
+                        Html.TextAreaFor(x => x.UserId, new { class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mô tả</label>
+                        Html.TextAreaFor(x => x.CommentMsg, new { class = "form-control" })
+                    </div>
+                    <h1>Your Rating:</h1>
+                    <ul class="user_star_rating">
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                    </ul>
+                    <textarea id="review_message" class="input_review" name="message" placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mô tả</label>
+                        Html.TextAreaFor(x => x.CommentMsg, new { class = "form-control" })
+                    </div>
+                </div>
+                <div class="text-left text-sm-right">
+                    <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
+                </div>
+            </form>
+        </div>
+    }
+    </div>-->
+

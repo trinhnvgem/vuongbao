@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ChalinStore.Models.EF.OrderDetail>
+@if (Model != null && Model.Any())
+{
+    int i = 1;
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                @*<th>Mã sản phẩm</th>*@
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                @*<th>Số lượng tồn</th>*@
+                <th>Thành tiền</th>s
+                @*<th>Tồn</th>*@
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    @*<td id=" id">@item.ProductId</td>*@
+                    <td>@item.Product.Title</td>
+                    <td>@item.Price</td>
+                    <td id="soluongmua">@item.Quantity</td>
+                    @*<td id="soluongton">@item.Product.Quantity</td>*@
+                    <td>@ChalinStore.Common.Common.FormatNumber((item.Price * item.Quantity), 0)</td>
+                    @*<td id="soluong">@(item.Order.TypePayment==2? (item.Product.Quantity=item.Product.Quantity - item.Quantity) : (item.Product.Quantity=item.Product.Quantity))</td>*@
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+}
