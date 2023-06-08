@@ -348,18 +348,26 @@ jQuery(document).ready(function($)
 	        });
 
 	        // Show only a selected number of items
-	        sortNums.each(function() /// 3
-	        {
-	        	$(this).on('click', function()
-	        	{
-	        		var numSortingText = $(this).text();
-					var numFilter = ':nth-child(-n+' + numSortingText + ')';
-	        		$('.num_sorting_text').text($(this).text());
-    				$('.product-grid').isotope({filter: numFilter }); // 10 - 3 -> 4 
-    				var paginationNumber = Math.ceil(sumOfProducts / numSortingText);
-                    initPagination(paginationNumber);    				
-	        	});
-	        });	
+	        sortNums.each(function()
+            	        {
+            	        	$(this).on('click', function()
+            	        	{
+            	        		var numSortingText = $(this).text();
+            					var numFilter = ':nth-child(-n+' + numSortingText + ')';
+            	        		$('.num_sorting_text').text($(this).text());
+                				$('.product-grid').isotope({filter: numFilter });
+            					var page_total = $('.page_total');
+            					var totalPagination = Math.ceil($('.product-item').length / numSortingText);
+            					page_total.text(totalPagination);
+            					// set Request.QueryString["sizePage"] = numSortingText; in 
+            					// set to url when click
+            					var url = window.location.href;
+            					// add sizePage to url
+            					var newUrl = url + "&sizePage=" + numSortingText;
+            					// set url
+            					window.history.pushState("object or string", "Title", newUrl);
+            	        	});
+            	        });
 
 	        // Filter based on the price range slider
 	        filterButton.on('click', function()
