@@ -39,9 +39,15 @@
             <h5>Filter by Price</h5>
         </div>
         <p>
-            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+            <a>Min</a>
+            <input id="minval" type="text" value="0" />
+            <a>Max</a>
+            <input id="maxval" type="text" value="500000" />
+            <a id="err">ffasd</a>
+            @*<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">*@
         </p>
-        <div id="slider-range"></div>
+    
+        @*<div id="slider-range"></div>*@
         <div class="filter_button">
             <span>filter</span>
         </div>
@@ -95,7 +101,7 @@
                         </li>
                         <li>
                             <span>Show</span>
-                            <span class="num_sorting_text">8</span>
+                            <span class="num_sorting_text">@ViewBag.pageSize</span>
                             <i class="fa fa-angle-down"></i>
                             <ul class="sorting_num">
                                 <li class="num_sorting_btn">
@@ -118,28 +124,7 @@
                         </div>
                     </div>
 
-                    <div class="pages d-flex flex-row align-items-center">
-                        <div class="page_current">
-                            <span>1</span>
-                            <ul class="page_selection">
-                                <li>
-                                    <a href="#">1</a>
-                                </li>
-                                <li>
-                                    <a href="#">2</a>
-                                </li>
-                                <li>
-                                    <a href="#">3</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="page_total"><span>of</span> 3</div>
-                        <div id="next_page" class="page_next">
-                            <a href="#">
-                                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
+                   
 
                     <div id="pagination">
 

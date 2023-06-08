@@ -13,7 +13,7 @@ namespace ChalinStore.Models.EF
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int Id { get; set; } 
         [Required(ErrorMessage = "Bạn không để trống tiêu đề tin")]
         [StringLength(150)]
         public string Title { get; set; }

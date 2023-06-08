@@ -43,7 +43,7 @@ namespace ChalinStore.Models
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<Color> Color { get; set; }
         public DbSet<Size> Size { get; set; }
-        //public DbSet<Comments> Comments { get; set; }
+        public DbSet<Comments> Comments { get; set; }
 
         public static ApplicationDbContext Create()
         {
