@@ -47,6 +47,9 @@ namespace ChalinStore.Controllers
                 
             }
             
+            var comments = db.Comments.ToList();
+            ViewBag.Comments = comments;
+            
             return View(item);
         }
         
