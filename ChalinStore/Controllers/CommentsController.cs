@@ -16,15 +16,13 @@ namespace ChalinStore.Controllers
         [HttpPost]
         // tạo controller để lưu comment
         public ActionResult Create(Comment model)
-        {
-            if (ModelState.IsValid)
-            {
+        {   
                 model.CommentDate = DateTime.Now;
                 db.Comments.Add(model);
                 db.SaveChanges();
-                return RedirectToAction("Detail", "Product", new { id = model.ProductId });
-            }
-            return RedirectToAction("Detail", "Product", new { id = model.ProductId });
+                var product = db.Products.Find(model.ProductId);
+                return RedirectToAction("Detail", "Products", new { alias = product.Alias, id = model.ProductId });
+                
         }
 
     }

@@ -1,4 +1,5 @@
-﻿@model ChalinStore.Models.EF.Product
+﻿@using Microsoft.AspNet.Identity
+@model ChalinStore.Models.EF.Product
 @{
     ViewBag.Title = Model.SeoTitle;
     ViewBag.SeoDescription = Model.SeoDescription ?? Model.Title;
@@ -154,8 +155,8 @@
                                     <div class="review">
                                      @foreach (var item in ViewBag.Comments)
                                      {
-                                         <div class="review_date">27 Aug 2016</div>
-                                         <div class="user_name"> @item.UserId </div>
+                                         <div class="review_date">@item.CommentDate</div>
+                                         <div class="user_name"> @(item.UserId == null ? "Khách" : item.UserId) </div>
 
                                          <p>@item.CommentMsg</p>
                                      }
@@ -178,14 +179,11 @@
                                                      <li><i class="fa fa-star" aria-hidden="true"></i></li>
                                                      <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
                                                  </ul>
-                                                 <textarea id="review_message" class="input_review" name="Id" placeholder="Id" rows="1" required data-error="Please, leave us a review."></textarea>
                                                  <textarea id="review_message" class="input_review" name="CommentMsg" placeholder="CommentMsg" rows="1" required data-error="Please, leave us a review."></textarea>
-                                                 <textarea id="review_message" class="input_review" name="CommentDate" placeholder="CommentDate" rows="1" required data-error="Please, leave us a review."></textarea>
-                                                 <textarea id="review_message" class="input_review" name="ProductId" placeholder="ProductId" rows="1" required data-error="Please, leave us a review."></textarea>
-                                                 <textarea id="review_message" class="input_review" name="ParenId" placeholder="ParenId" rows="1" required data-error="Please, leave us a review."></textarea>
-                                                 <textarea id="review_message" class="input_review" name="UserId" placeholder="UserId" rows="1" required data-error="Please, leave us a review."></textarea>
-                                                 <textarea id="review_message" class="input_review" name="Rate" placeholder="Rate" rows="1" required data-error="Please, leave us a review."></textarea>
-                                                 
+                                                 <textarea id="review_message" class="input_review" name="ParenId" placeholder="ParenId" rows="1"  data-error="Please, leave us a review."></textarea>
+                                                 <textarea id="review_message" class="input_review" name="Rate" placeholder="Rate" rows="1"  data-error="Please, leave us a review."></textarea>
+                                                 <textarea id="review_message" class="input_review" style="display: none" name="ProductId" placeholder="ProductId" rows="1"  data-error="Please, leave us a review.">@Model.Id</textarea>
+                                                  <textarea id="review_message" class="input_review" style="display: none" name="UserId" placeholder="UserId" rows="1"  data-error="Please, leave us a review.">@User.Identity.GetUserId()</textarea>
                                              </div>
                                              <div class="text-left text-sm-right">
                                                  <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
