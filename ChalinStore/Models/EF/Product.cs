@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
@@ -62,5 +63,6 @@ namespace ChalinStore.Models.EF
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<Color> Color { get; set; }
         public virtual ICollection<Size> Size { get; set; }
+       
     }
 }

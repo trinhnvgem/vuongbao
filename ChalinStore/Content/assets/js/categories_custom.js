@@ -355,19 +355,30 @@ jQuery(document).ready(function($)
             	        		var numSortingText = $(this).text();
             					var numFilter = ':nth-child(-n+' + numSortingText + ')';
             	        		$('.num_sorting_text').text($(this).text());
+							
                 				$('.product-grid').isotope({filter: numFilter });
             					var page_total = $('.page_total');
             					var totalPagination = Math.ceil($('.product-item').length / numSortingText);
             					page_total.text(totalPagination);
+            					var page_selection = $('.page_selection');
+            					// add <li><a href="#">{}</a></li> to page_selection
+            					// var page_selection_html = '';
+            					// for (var i = 1; i <= totalPagination; i++) {
+            					// 	page_selection_html += '<li><a href="#">' + i + '</a></li>';
+            					// }
+            					// page_selection.html(page_selection_html);
+            
             					// set Request.QueryString["sizePage"] = numSortingText; in 
             					// set to url when click
             					var url = window.location.href;
-            					// add sizePage to url
-            					var newUrl = url + "&sizePage=" + numSortingText;
+            					// reset and add sizePage to url
+            					var newUrl = url.split('?')[0]+'?sizePage='+parseInt(numSortingText)+'&page=1'  ;
             					// set url
             					window.history.pushState("object or string", "Title", newUrl);
+								window.location.reload();
+								
             	        	});
-            	        });
+            	        });	
 
 	        // Filter based on the price range slider
 	        filterButton.on('click', function()
@@ -375,12 +386,27 @@ jQuery(document).ready(function($)
 	        	$('.product-grid').isotope({
 		            filter: function()
 		            {
-		            	var priceRange = $('#amount').val();
-			        	var priceMin = parseFloat(priceRange.split('-')[0].replace('đ', ''));
-			        	var priceMax = parseFloat(priceRange.split('-')[1].replace('đ', ''));
-						var itemPrice = $(this).find('.in_product_price').clone().children().remove().end().text();
+		            	/* var priceRange = $('#amount').val();*/
+			        	var priceMin = parseInt($('#minval').val());
+			        	var priceMax = parseInt($('#maxval').val());
+						
+						if(isNaN(priceMin) || isNaN(priceMax) ) {
 
-			        	return (itemPrice > priceMin) && (itemPrice < priceMax);
+							document.getElementById("err").style.color = "red";
+							$('#err').text('Please choose price range');
+							 var itemPrice = parseInt($(this).find('.in_product_price').clone().children().remove().end().text());
+							 return (itemPrice > 0) && (itemPrice< 9999999999999);
+							
+						}
+						else 
+						{
+							document.getElementById("err").textContent = "";
+							var itemPrice = parseInt($(this).find('.in_product_price').clone().children().remove().end().text());
+							return (itemPrice > priceMin) && (itemPrice < priceMax);
+						
+						
+							
+						}
 		            },
 		            animationOptions: {
 		                duration: 750,

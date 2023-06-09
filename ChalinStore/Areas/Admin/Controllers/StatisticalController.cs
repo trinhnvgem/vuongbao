@@ -26,6 +26,7 @@ namespace ChalinStore.Areas.Admin.Controllers
                         on o.Id equals od.OrderId
                         join p in db.Products
                         on od.ProductId equals p.Id
+                        where o.TypePayment == 2
                         select new
                         {
                             

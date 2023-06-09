@@ -44,11 +44,25 @@ namespace ChalinStore.Controllers
                 db.Products.Attach(item);
                 item.ViewCount = item.ViewCount + 1;
                 db.Entry(item).Property(x => x.ViewCount).IsModified = true;
-               
+                
             }
-
+            
+            var comments = db.Comments.Where(x => x.ProductId == id).ToList();
+            //get name user
+            foreach (var comment in comments)
+            {
+                var user = db.Users.Find(comment.UserId);
+                if (user != null)
+                {
+                    comment.UserId = user.UserName;
+                }
+            }
+            ViewBag.Comments = comments;
+           
             return View(item);
         }
+        
+        
         public ActionResult ProductCategory(string alias, int id, int? page)
         // hiển thi danh sách sản phẩm
         {

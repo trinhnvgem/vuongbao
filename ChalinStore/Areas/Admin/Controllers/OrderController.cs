@@ -47,6 +47,7 @@ namespace ChalinStore.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UpdateTT(int id, int trangthai)
         {
+
             var item = db.Orders.Find(id);
             if (item != null)
             {
@@ -54,28 +55,29 @@ namespace ChalinStore.Areas.Admin.Controllers
                 item.TypePayment = trangthai;
                 db.Entry(item).Property(x => x.TypePayment).IsModified = true;
                 db.SaveChanges();
-                
                 var items = db.OrderDetails.Where(x => x.OrderId == id).ToList();
                 foreach (var sp in items)
                 {
-                    var itemp = db.Products.Find(id);
-
-                    if (itemp.Id == sp.ProductId)
+                    if (item.TypePayment != 2)
                     {
-                    
-                        itemp.Quantity= itemp.Quantity - sp.Quantity;
-                        db.Products.Attach(itemp);
-                        db.Entry(itemp).Property(x => x.Quantity).IsModified = true;
+                        var sanpham = sp.Product;
+                        sanpham.Quantity = sanpham.Quantity + sp.Quantity;
+                        db.Products.Attach(sanpham);
+                        db.Entry(sanpham).Property(x => x.Quantity).IsModified = true;
                         db.SaveChanges();
-                      }
+                    }
+                    else {
+                        var sanpham = sp.Product;
+                        sanpham.Quantity = sanpham.Quantity - sp.Quantity;
+                        db.Products.Attach(sanpham);
+                        db.Entry(sanpham).Property(x => x.Quantity).IsModified = true;
+                        db.SaveChanges();
+                    }
 
-                    //sanpham.Quantity = sanpham.Quantity - sp.Quantity;
-                    //db.Products.Attach(sanpham);
-                    //db.Entry(sanpham).Property(x => x.Quantity).IsModified = true;
-                    //db.SaveChanges();
+
 
                 }
-                    
+
                 return Json(new { message = "Success", Success = true });
             }
             return Json(new { message = "Unsuccess", Success = false });
