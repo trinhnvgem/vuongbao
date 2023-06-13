@@ -85,7 +85,7 @@ namespace ChalinStore.Controllers
         public ActionResult Partial_ItemsByCateId()
             // hiển thi số lương sp trong phần menu-arrivals là 20
         {
-            var items = db.Products.Where(x => x.IsHome && x.IsActive).Take(20).ToList();
+            var items = db.Products.Where(x => x.IsHome && x.IsActive).ToList();
             return PartialView(items);
         }
 

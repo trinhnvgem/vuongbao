@@ -359,7 +359,9 @@ jQuery(document).ready(function($)
 	7. Init Isotope Filtering
 
 	*/
-
+	let all = document.querySelector('.grid_sorting_button[data-filter="*"]');
+// click on it
+	all.click();
     function initIsotopeFiltering()
     {
     	if($('.grid_sorting_button').length)
@@ -376,16 +378,18 @@ jQuery(document).ready(function($)
 		        $(this).addClass('active');
 		 
 		        var selector = $(this).attr('data-filter');
-		        $('.product-grid').isotope({
-		            filter: selector,
-		            animationOptions: {
+				var numProducts = 10;
+		        $('.product-grid').isotope(
+					{
+						filter: selector === '*' ? '.product-item:lt('+ numProducts +')' : selector + ':lt(' + numProducts + ')',
+		            	animationOptions: {
 		                duration: 750,
 		                easing: 'linear',
 		                queue: false
-		            }
-		        });
+		            },
 
-		        
+					
+		        });
 		         return false;
 		    });
     	}
