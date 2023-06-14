@@ -33,6 +33,12 @@
 
 @media only screen and (max-width: 1540px)
 {
+
+	.main_slider
+	{
+		min-height: 475px;
+		height: 600px !important;
+	}
 	
 }
 
@@ -42,7 +48,11 @@
 
 @media only screen and (max-width: 1380px)
 {
-	
+	.main_slider
+	{
+		min-height: 475px;
+		height: 500px !important;;
+	}
 }
 
 /************
@@ -51,7 +61,11 @@
 
 @media only screen and (max-width: 1280px)
 {
-	
+	.main_slider
+	{
+		min-height: 475px;
+		height: 500px !important;;
+	}
 }
 
 /************
@@ -63,7 +77,7 @@
 	.main_slider
 	{
 		min-height: 475px;
-		height: calc(100vw / 1.714);
+		height: 500px !important;;
 	}
 	.main_slider_content
 	{
