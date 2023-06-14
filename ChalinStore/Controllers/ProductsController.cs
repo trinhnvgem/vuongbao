@@ -63,7 +63,7 @@ namespace ChalinStore.Controllers
         }
         
         
-        public ActionResult ProductCategory(string alias, int id, int? page)
+        public ActionResult ProductCategory( int id)
         // hiển thi danh sách sản phẩm
         {
             var items = db.Products.ToList();
