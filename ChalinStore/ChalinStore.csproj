@@ -300,7 +300,6 @@
     <Content Include="Content\assets\dist\js\pages\dashboard3.js" />
     <Content Include="Content\assets\images\icon.png" />
     <Content Include="Content\assets\images\icon1.png" />
-    <Content Include="Content\assets\images\logo.jpg" />
     <Content Include="Content\assets\images\logo.png" />
     <Content Include="Content\assets\images\logo1.jpg" />
     <Content Include="Content\assets\images\logo1.png" />

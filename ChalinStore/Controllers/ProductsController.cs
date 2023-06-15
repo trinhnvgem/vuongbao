@@ -63,23 +63,34 @@ namespace ChalinStore.Controllers
         }
         
         
-        public ActionResult ProductCategory( int id)
+        public ActionResult ProductCategory( int id,string Searchtext, int? page, int? sizePage)
         // hiển thi danh sách sản phẩm
         {
-            var items = db.Products.ToList();
+            var pageSize = sizePage ?? 8;
+            if (page == null)
+            {
+                page = 1;
+            }
+            IEnumerable<Product> items = db.Products.ToList();
             if (id > 0)
             {
                 items = items.Where(x => x.ProductCategoryId == id).ToList();
+            }
+            if (!string.IsNullOrEmpty(Searchtext))
+            {
+                items = items.Where(x => x.Alias.Contains(Searchtext) || x.Title.Contains(Searchtext));
             }
             var cate = db.ProductCategories.Find(id);
             if (cate != null)
             {
                 ViewBag.CateName = cate.Title;
             }
-
+            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            items = items.ToPagedList(pageIndex, pageSize);
+            ViewBag.PageSize = pageSize;
+            ViewBag.Page = page;
             ViewBag.CateId = id;
             return View(items);
-
         }
 
         public ActionResult Partial_ItemsByCateId()

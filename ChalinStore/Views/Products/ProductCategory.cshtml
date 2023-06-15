@@ -37,11 +37,14 @@
                         <h5>Filter by Price</h5>
                     </div>
                     <p>
-                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                        <input type="hidden" id="FromAmount" />
-                        <input type="hidden" id="ToAmount" />
+                            <a>Min</a>
+                            <input id="minval" type="text" value="0" />
+                            <a>Max</a>
+                            <input id="maxval" type="text" value="500000" />
+                            <a id="err"></a>
+                            @*<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">*@
                     </p>
-                    <div id="slider-range"></div>
+                  
                     <div class="filter_button"><span>filter</span></div>
 
 
@@ -98,68 +101,77 @@
 
                             <!-- Product Sorting -->
 
-                              @* <div class="product_sorting_container product_sorting_container_top"> *@
-                              @*                *@
-                              @*               <ul class="product_sorting"> *@
-                              @*                   <!-- Sorting options --> *@
-                              @*                   <li> *@
-                              @*                       <span class="type_sorting_text">Default Sorting</span> *@
-                              @*                       <i class="fa fa-angle-down"></i> *@
-                              @*                       <ul class="sorting_type"> *@
-                              @*                           <!-- Default sorting option --> *@
-                              @*                           <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'> *@
-                              @*                               <span>Default Sorting</span> *@
-                              @*                           </li> *@
-                              @*                           <!-- Sorting options by price --> *@
-                              @*                           <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'> *@
-                              @*                               <span>Price</span> *@
-                              @*                           </li> *@
-                              @*                           <!-- Sorting options by product name --> *@
-                              @*                           <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'> *@
-                              @*                               <span>Product Name</span> *@
-                              @*                           </li> *@
-                              @*                       </ul> *@
-                              @*                   </li> *@
-                              @*                   <!-- Number of items to show per page --> *@
-                              @*                   <li> *@
-                              @*                       <span>Show</span> *@
-                              @*                       <span class="num_sorting_text">@ViewBag.pageSize</span> *@
-                              @*                       <i class="fa fa-angle-down"></i> *@
-                              @*                       <ul class="sorting_num"> *@
-                              @*                           <li class="num_sorting_btn"> *@
-                              @*                               <span>4</span> *@
-                              @*                           </li> *@
-                              @*                           <li class="num_sorting_btn"> *@
-                              @*                               <span>8</span> *@
-                              @*                           </li> *@
-                              @*                           <li class="num_sorting_btn"> *@
-                              @*                               <span>12</span> *@
-                              @*                           </li> *@
-                              @*                           <li class="num_sorting_btn"> *@
-                              @*                               <span>20</span> *@
-                              @*                           </li> *@
-                              @*                       </ul> *@
-                              @*                   </li> *@
-                              @*                   <!-- Search functionality --> *@
-                              @*                   <div style="position: absolute; top: 0; left: 400px;"> *@
-                              @*                           <div> *@
-                              @*                               <!-- Search form --> *@
-                              @*                               @using (Html.BeginForm("ProductCategory", "Products", FormMethod.Get, new { })) *@
-                              @*                               { *@
-                              @*                                   <div class="input-group input-group-sm"> *@
-                              @*                                       @Html.TextBox("Searchtext", null, new { @class = "form-control" }) *@
-                              @*                                       <span class="input-group-append"> *@
-                              @*                                           <button type="submit" style="margin-left: 5px" class="btn btn-info btn-flat">Tìm kiếm</button> *@
-                              @*                                       </span> *@
-                              @*                                   </div> *@
-                              @*                               } *@
-                              @*                           </div> *@
-                              @*                       </div> *@
-                              @*               </ul> *@
-                              @*     <div id="pagination"> *@
-                              @* *@
-                              @*                </div> *@
-                              @*            </div> *@
+                            <div class="product_sorting_container product_sorting_container_top">
+                                           
+                                           <ul class="product_sorting">
+                                               <!-- Sorting options -->
+                                               <li>
+                                                   <span class="type_sorting_text">Default Sorting</span>
+                                                   <i class="fa fa-angle-down"></i>
+                                                   <ul class="sorting_type">
+                                                       <!-- Default sorting option -->
+                                                       <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'>
+                                                           <span>Default Sorting</span>
+                                                       </li>
+                                                       <!-- Sorting options by price -->
+                                                       <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'>
+                                                           <span>Price</span>
+                                                       </li>
+                                                       <!-- Sorting options by product name -->
+                                                       <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'>
+                                                           <span>Product Name</span>
+                                                       </li>
+                                                   </ul>
+                                               </li>
+                                               <!-- Number of items to show per page -->
+                                               <li>
+                                                   <span>Show</span>
+                                                   <span class="num_sorting_text">@ViewBag.pageSize</span>
+                                                   <i class="fa fa-angle-down"></i>
+                                                   <ul class="sorting_num">
+                                                       <li class="num_sorting_btn">
+                                                           <span>4</span>
+                                                       </li>
+                                                       <li class="num_sorting_btn">
+                                                           <span>8</span>
+                                                       </li>
+                                                       <li class="num_sorting_btn">
+                                                           <span>12</span>
+                                                       </li>
+                                                       <li class="num_sorting_btn">
+                                                           <span>20</span>
+                                                       </li>
+                                                   </ul>
+                                               </li>
+                                               <!-- Search functionality -->
+                                               <div style="position: absolute; top: 0; left: 400px;">
+                                                       <div>
+                                                           <!-- Search form -->
+                                                           @using (Html.BeginForm("ProductCategory", "Products", FormMethod.Get, new { }))
+                                                           {
+                                                               <div class="input-group input-group-sm">
+                                                                   @Html.TextBox("Searchtext", null, new { @class = "form-control" })
+                                                                   <span class="input-group-append">
+                                                                       <button type="submit" style="margin-left: 5px" class="btn btn-info btn-flat">Tìm kiếm</button>
+                                                                   </span>
+                                                               </div>
+                                                           }
+                                                       </div>
+                                                   </div>
+                                           </ul>
+                                            <div class="row">
+                                                <div class="col-6"></div>
+                                                <div class="col-6" style="text-align:right;">
+                                                  @Html.PagedListPager((IPagedList)Model, page => Url.Action("ProductCategory", new { page, sizePage = Request.QueryString["sizePage"] }))
+                                                </div>
+                                            </div>
+                        
+                                           
+                        
+                                            <div id="pagination">
+                        
+                                            </div>
+                                        </div>
 
                             <!-- Product Grid -->
 
@@ -209,16 +221,6 @@
 
 
                             </div>
-
-                            <!-- Product Sorting -->
-
-                            @*<div class="row">
-                                <div class="col-6"></div>
-                                <div class="col-6" style="text-align:right;">
-                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-                                </div>
-                            </div>*@
-
                         </div>
                     </div>
                 </div>

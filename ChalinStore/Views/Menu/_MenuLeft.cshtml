@@ -4,6 +4,15 @@
 {
 
     <ul class="sidebar_categories">
+        @if(ViewBag.CateId == null)
+    {
+        <li class="active"><a href="/san-pham"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Tất Cả</a></li>
+    }
+        else
+        {
+            <li><a href="/san-pham"><span></span>Tất Cả</a></li>
+        }
+       
         @foreach (var item in Model)
         {
             if (ViewBag.CateId == item.Id)
