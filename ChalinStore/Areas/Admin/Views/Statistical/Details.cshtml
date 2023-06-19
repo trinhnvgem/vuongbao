@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thống kê</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Thống kê</li>
+                    <li class="breadcrumb-item">
+                        <a href="/admin/statistical/Details">Thống kê san pham</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Thống kê danh thu</h3>
+            <div class="card-tools">
+                <input type="date" name="fromDate" value="" id="ngaydau" onload="getDate()" />
+                <input type="date" name="toDate" value="" id="ngaycuoi" />
+                <button type="button" class="btn btn-info btn-flat timkiem">Tìm kiếm</button>
+            </div>
+        </div>
+        <div class="card-body"> 
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Mã SP</th>
+                            <th>Tên SP</th>
+                            <th>Số Lương bán</th>
+                            <th>Số Lương Tồn</th>
+                            <th>Số Lương </th>
+                            <th>Giá bán</th>
+                            <th>Giá Nhập</th>
+                            <th>Lợi Nhuận</th>
+                        </tr>
+                    </thead>
+                    <tbody id="load_data"></tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            Footer
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+@section scripts{
+    <script src="~/Content/clients/plugins/chart.js/Chart.min.js"></script>
+    <script src="~/Content/assets/plugins/moment/moment.min.js"></script>
+    <script>
+
+
+        $('body').on('click', '.btn.btn-info.btn-flat.timkiem', function () {
+            /* ChartJS
+             * -------
+             * Here we will create a few charts using ChartJS
+             */
+
+            var arrDoanhThu = [];
+            var arrLoiNhuan = [];
+            var arrDate = [];
+            var ngaydau = $('#ngaydau').val();
+            var ngaycuoi = $('#ngaycuoi').val();
+
+            $.ajax({
+                url: '/Statistical/GetStatistical_Product',
+                type: 'GET',
+                data: { fromDate:ngaydau, toDate: ngaycuoi },
+                success: function (rs) {
+                    load_data(rs.Data);
+                }
+            });
+
+
+        })
+
+        function load_data(data) {
+            var strHtml = "";
+            $.each(data, function (i, item) {
+                strHtml += "<tr>";
+                strHtml += "<td>" + (i + 1) + "</td>";
+                strHtml += "<td>" + + item.ido + "</td>";
+                strHtml += "<td>" + item.Title + "</td>";
+                strHtml += "<td>" + item.Quantity + "</td>";
+                strHtml += "<td>" + item.Quantityp + "</td>";
+                strHtml += "<td>" + + item.Quantityo + "</td>";
+                strHtml += "<td>" + item.Price + "</td>";
+                strHtml += "<td>" + item.OriginalPrice + "</td>";
+                strHtml += "<td>" + item.LoiNhuan + "</td>";
+                strHtml += "</tr>";
+            });
+            $('#load_data').html(strHtml);
+        }
+    </script>
+}
