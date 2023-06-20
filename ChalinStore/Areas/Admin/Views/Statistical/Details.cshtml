@@ -101,12 +101,16 @@
             $.each(data, function (i, item) {
                 strHtml += "<tr>";
                 strHtml += "<td>" + (i + 1) + "</td>";
-                strHtml += "<td>" + item.ido + "</td>";
+                strHtml += "<td>" + item.orderDetail_ProductId + "</td>";
                 strHtml += "<td>" + item.Title + "</td>";
                 strHtml += "<td>" + item.Quantity + "</td>";
                 strHtml += "<td>" + item.Quantityp + "</td>";
-                $.each(data1, function(i,item){
-                    strHtml += "<td>" + item.Quantityn + "</td>";
+                $.each(data1, function(o,item1){
+                        if (item.orderDetail_ProductId == item1.orderDetail_ProductId)
+                            {
+                                
+                    strHtml += "<td>" + item1.Input_Quantity + "</td>";}
+                    
                 })
                 strHtml += "<td>" + item.Price + "</td>";
                 strHtml += "<td>" + item.OriginalPrice + "</td>";

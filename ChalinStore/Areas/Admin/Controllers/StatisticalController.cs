@@ -27,10 +27,10 @@ namespace ChalinStore.Areas.Admin.Controllers
         }
 
         // danh sách sp theo trạng thái
-        public ActionResult Details_1()
-        {
-            return View();
-        }
+        // public ActionResult Details_1()
+        // {
+        //     return View();
+        // }
 
 
         // thống kê biểu đồ
@@ -85,61 +85,75 @@ namespace ChalinStore.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult GetStatistical_Product(string fromDate, string toDate)
         {
-            var query = from o in db.Orders
-
-                        join od in db.OrderDetails
-                        on o.Id equals od.OrderId
-                        join p in db.Products
-                        on od.ProductId equals p.Id
-                        where o.TypePayment == 2
+            
+            
+            
+            var query = from order in db.Orders
+                join orderDetail in db.OrderDetails
+                        on order.Id equals orderDetail.OrderId
+                        join product in db.Products
+                        on orderDetail.ProductId equals product.Id
+                        where order.TypePayment == 2
                         select new
                         {
-
-                            CreatedDate = o.CreatedDate,
-                            Quantity = od.Quantity,
-                            TypePayment = o.TypePayment,
-                            Title = p.Title,
-                            ido = od.ProductId,
-                            Price = od.Price,
-                            OriginalPrice = p.OriginalPrice,
-                            Quantityp = p.Quantity
+                            order_CreatedDate = order.CreatedDate,
+                            order_TypePayment = order.TypePayment,
+                            orderDetail_Quantity = orderDetail.Quantity,
+                            orderDetail_ProductId = orderDetail.ProductId,
+                            product_Price = product.Price,
+                            product_Title = product.Title,
+                            product_OriginalPrice = product.OriginalPrice,
+                            product_Quantity = product.Quantity
                         };
-            var odq = query.GroupBy(x => x.ido).Select(x => new {
-                Quantityo=x.Sum(y=>y.Quantity),
-                Quantityt = x.Min(y => y.Quantityp)
+            
+            
+            
+            
+            //tính số lượng sản phẩm nhập
+            var odq = query.GroupBy(x => x.orderDetail_ProductId).Select(x => new {
+                orderDetail_Quantity=x.Sum(y=>y.orderDetail_Quantity),
+                product_Quantity = x.Min(y => y.product_Quantity),
+                orderDetail_ProductId = x.Min(y => y.orderDetail_ProductId),
             }).Select(x => new
             {
-                Quantityn=x.Quantityt+x.Quantityo,
+                orderDetail_ProductId=x.orderDetail_ProductId,
+                Input_Quantity=x.orderDetail_Quantity+x.product_Quantity,
             });
+            
+            
+            
+            
+            
+            
             if (!string.IsNullOrEmpty(fromDate))
             {
                 DateTime startDate = DateTime.ParseExact(fromDate, "yyyy-MM-dd", null);
-                query = query.Where(x => x.CreatedDate >= startDate);
+                query = query.Where(x => x.order_CreatedDate >= startDate);
             }
             if (!string.IsNullOrEmpty(toDate))
             {
                 DateTime endDate = DateTime.ParseExact(toDate, "yyyy-MM-dd", null);
-                query = query.Where(x => x.CreatedDate <= endDate);
+                query = query.Where(x => x.order_CreatedDate <= endDate);
             }
 
-            var jquery = query.GroupBy(x => x.ido).Select(x => new
+            var jquery = query.GroupBy(x => x.orderDetail_ProductId).Select(x => new
             {
                 
-                Quantity = x.Sum(y => y.Quantity),
-                Quantityp=x.Min(y => y.Quantityp),
-                Title = x.Min(y => y.Title),
-                ido = x.Min(y => y.ido),
-                Price = x.Min(y => y.Price),
-                OriginalPrice = x.Min(y => y.OriginalPrice),
-                TotalBuy = x.Sum(y => y.Quantity * y.OriginalPrice),
-                TotalSell = x.Sum(y => y.Quantity * y.Price),
+                Quantity = x.Sum(y => y.orderDetail_Quantity),
+                Quantityp=x.Min(y => y.product_Quantity),
+                Title = x.Min(y => y.product_Title),
+                orderDetail_ProductId = x.Min(y => y.orderDetail_ProductId),
+                Price = x.Min(y => y.product_Price),
+                OriginalPrice = x.Min(y => y.product_OriginalPrice),
+                TotalBuy = x.Sum(y => y.orderDetail_Quantity * y.product_OriginalPrice),
+                TotalSell = x.Sum(y => y.orderDetail_Quantity * y.product_Price),
 
             }).Select(x => new
             {
                 Quantity = x.Quantity,
                 Quantityp=x.Quantityp,
                 Quantityb = x.Quantity + x.Quantityp,
-                ido= x.ido,
+                orderDetail_ProductId= x.orderDetail_ProductId,
                 Title = x.Title,
                 Price = x.Price,
                 OriginalPrice = x.OriginalPrice,
@@ -167,12 +181,12 @@ namespace ChalinStore.Areas.Admin.Controllers
                             Quantity = od.Quantity,
                             TypePayment = o.TypePayment,
                             Title = p.Title,
-                            ido = od.ProductId,
+                            orderDetail_ProductId = od.ProductId,
                             Price = od.Price,
                             OriginalPrice = p.OriginalPrice,
                             Quantityp = p.Quantity
                         };
-            var odq = query.GroupBy(x => x.ido).Select(x => new {
+            var odq = query.GroupBy(x => x.orderDetail_ProductId).Select(x => new {
                 Title = x.Min(y => y.Title),                
                 Quantity = x.Sum(y => y.Quantity),
                 Quantityt = x.Min(y => y.Quantityp),
@@ -220,12 +234,12 @@ namespace ChalinStore.Areas.Admin.Controllers
                             Quantity = od.Quantity,
                             TypePayment = o.TypePayment,
                             Title = p.Title,
-                            ido = od.ProductId,
+                            orderDetail_ProductId = od.ProductId,
                             Price = od.Price,
                             OriginalPrice = p.OriginalPrice,
                             Quantityp = p.Quantity
                         };
-            var odq = query.GroupBy(x => x.ido).Select(x => new {
+            var odq = query.GroupBy(x => x.orderDetail_ProductId).Select(x => new {
                 Title = x.Min(y => y.Title),
                 Quantity = x.Sum(y => y.Quantity),
                 Quantityt = x.Min(y => y.Quantityp),
@@ -263,12 +277,12 @@ namespace ChalinStore.Areas.Admin.Controllers
                             Quantity = od.Quantity,
                             TypePayment = o.TypePayment,
                             Title = p.Title,
-                            ido = od.ProductId,
+                            orderDetail_ProductId = od.ProductId,
                             Price = od.Price,
                             OriginalPrice = p.OriginalPrice,
                             Quantityp = p.Quantity
                         };
-            var odq = query.GroupBy(x => x.ido).Select(x => new {
+            var odq = query.GroupBy(x => x.orderDetail_ProductId).Select(x => new {
                 Title = x.Min(y => y.Title),
                 Quantity = x.Sum(y => y.Quantity),
                 Quantityt = x.Min(y => y.Quantityp),

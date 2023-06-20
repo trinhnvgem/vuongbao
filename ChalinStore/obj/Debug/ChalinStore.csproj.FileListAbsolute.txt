@@ -578,3 +578,5 @@ C:\Users\vuongnv\Desktop\Do An\vuongbao\ChalinStore\obj\Debug\ChalinStore.csproj
 C:\Users\vuongnv\Desktop\Do An\vuongbao\ChalinStore\obj\Debug\ChalinStore.csproj.CopyComplete
 C:\Users\vuongnv\Desktop\Do An\vuongbao\ChalinStore\obj\Debug\ChalinStore.dll
 C:\Users\vuongnv\Desktop\Do An\vuongbao\ChalinStore\obj\Debug\ChalinStore.pdb
+C:\Users\vuongnv\Desktop\Do An\vuongbao\ChalinStore\obj\Debug\ChalinStore.Migrations.InitialCreate.resources
+C:\Users\vuongnv\Desktop\Do An\vuongbao\ChalinStore\obj\Debug\ChalinStore.csproj.GenerateResource.cache
