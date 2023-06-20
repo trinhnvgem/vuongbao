@@ -19,11 +19,17 @@ namespace ChalinStore
               namespaces: new[] { "ChalinStore.Controllers" }
           );
             routes.MapRoute(
-         name: "CheckOut",
-         url: "thanh-toan",
-         defaults: new { controller = "ShoppingCart", action = "CheckOut", alias = UrlParameter.Optional },
-         namespaces: new[] { "ChalinStore.Controllers" }
-     );
+                name: "CheckOut",
+                url: "thanh-toan",
+                defaults: new { controller = "ShoppingCart", action = "CheckOut", alias = UrlParameter.Optional },
+                namespaces: new[] { "WebBanHangOnline.Controllers" }
+            );
+            routes.MapRoute(
+                name: "vnpay_return",
+                url: "vnpay_return",
+                defaults: new { controller = "ShoppingCart", action = "VnpayReturn", alias = UrlParameter.Optional },
+                namespaces: new[] { "WebBanHangOnline.Controllers" }
+            );
             routes.MapRoute(
              name: "ShoppingCart",
              url: "gio-hang",

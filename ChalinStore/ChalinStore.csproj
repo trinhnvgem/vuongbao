@@ -3609,6 +3609,7 @@
     <Content Include="Uploads\_thumbs\Images\sanpham\single_3_thumb.jpg" />
     <Content Include="Uploads\_thumbs\Images\sanpham\slider_1.jpg" />
     <Content Include="Uploads\_thumbs\Images\setting\product_6.png" />
+    <Content Include="Views\ShoppingCart\VnpayReturn.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

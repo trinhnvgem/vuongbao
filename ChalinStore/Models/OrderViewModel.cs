@@ -8,7 +8,6 @@ namespace ChalinStore.Models
 {
     public class OrderViewModel
     {
-
         [Required(ErrorMessage = "Tên khách hàng không để trống")]
         public string CustomerName { get; set; }
         [Required(ErrorMessage = "Số điện thoại không để trống")]
@@ -17,5 +16,6 @@ namespace ChalinStore.Models
         public string Address { get; set; }
         public string Email { get; set; }
         public int TypePayment { get; set; }
+        public int TypePaymentVN { get; set; }
     }
 }

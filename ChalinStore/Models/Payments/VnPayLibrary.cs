@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace WebBanHangOnline.Models.Payments
+namespace ChalinStore.Models.Payments
 {
     public class VnPayLibrary
     {
