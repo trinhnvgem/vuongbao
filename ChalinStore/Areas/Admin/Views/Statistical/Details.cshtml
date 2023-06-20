@@ -86,30 +86,34 @@
             $.ajax({
                 url: '/Statistical/GetStatistical_Product',
                 type: 'GET',
-                data: { fromDate:ngaydau, toDate: ngaycuoi },
+                data: { fromDate: ngaydau, toDate: ngaycuoi },
+                data1: { fromDate: '', toDate: '' },
                 success: function (rs) {
-                    load_data(rs.Data);
+                    load_data(rs.Data,rs.Data1);
                 }
             });
 
 
         })
-
-        function load_data(data) {
+        // hiển thị danh sách for
+        function load_data(data,data1) {
             var strHtml = "";
             $.each(data, function (i, item) {
                 strHtml += "<tr>";
                 strHtml += "<td>" + (i + 1) + "</td>";
-                strHtml += "<td>" + + item.ido + "</td>";
+                strHtml += "<td>" + item.ido + "</td>";
                 strHtml += "<td>" + item.Title + "</td>";
                 strHtml += "<td>" + item.Quantity + "</td>";
                 strHtml += "<td>" + item.Quantityp + "</td>";
-                strHtml += "<td>" + + item.Quantityo + "</td>";
+                $.each(data1, function(i,item){
+                    strHtml += "<td>" + item.Quantityn + "</td>";
+                })
                 strHtml += "<td>" + item.Price + "</td>";
                 strHtml += "<td>" + item.OriginalPrice + "</td>";
                 strHtml += "<td>" + item.LoiNhuan + "</td>";
                 strHtml += "</tr>";
             });
+           
             $('#load_data').html(strHtml);
         }
     </script>
