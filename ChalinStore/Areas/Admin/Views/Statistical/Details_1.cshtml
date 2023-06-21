@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details_1";
 }
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -30,25 +31,23 @@
         <div class="card-header">
             <h3 class="card-title">Thống kê danh thu</h3>
             <div class="card-tools">
-                <input type="date" name="fromDate" value="" id="ngaydau" onload="getDate()" />
-                <input type="date" name="toDate" value="" id="ngaycuoi" />
-                <button type="button" class="btn btn-info btn-flat timkiem">Tìm kiếm</button>
+                <button type="button" class="btn btn-info btn-flat daban">Đã Bán</button>
+                <button type="button" class="btn btn-info btn-flat chothanhtoan">Chờ Thanh Toán</button>
+                <button type="button" class="btn btn-info btn-flat huydon">Huỷ Đơn</button>
             </div>
         </div>
-        <div class="card-body"> 
+        <div class="card-body">
             <div class="col-md-12">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Mã SP</th>
                             <th>Tên SP</th>
-                            <th>Số Lương bán</th>
-                            <th>Số Lương Tồn</th>
                             <th>Số Lương </th>
+                            <th>Số Lương Tồn</th>
+                            <th>Số Lương Nhập </th>
                             <th>Giá bán</th>
                             <th>Giá Nhập</th>
-                            <th>Lợi Nhuận</th>
                         </tr>
                     </thead>
                     <tbody id="load_data"></tbody>
@@ -71,53 +70,80 @@
     <script>
 
 
-        $('body').on('click', '.btn.btn-info.btn-flat.timkiem', function () {
-            /* ChartJS
-             * -------
-             * Here we will create a few charts using ChartJS
-             */
+        $('body').on('click', '.btn.btn-info.btn-flat.daban', function () {
 
-            var arrDoanhThu = [];
-            var arrLoiNhuan = [];
-            var arrDate = [];
             var ngaydau = $('#ngaydau').val();
             var ngaycuoi = $('#ngaycuoi').val();
 
             $.ajax({
-                url: '/Statistical/GetStatistical_Product',
+                url: '/Statistical/GetStatistical_Productb',
                 type: 'GET',
-                data: { fromDate: ngaydau, toDate: ngaycuoi },
+                data: { fromDate: '', toDate: '' },
                 data1: { fromDate: '', toDate: '' },
                 success: function (rs) {
-                    load_data(rs.Data,rs.Data1);
+                    load_data(rs.Data, rs.Data1);
+                }
+            });
+
+
+        })
+
+        $('body').on('click', '.btn.btn-info.btn-flat.chothanhtoan', function () {
+
+            var ngaydau = $('#ngaydau').val();
+            var ngaycuoi = $('#ngaycuoi').val();
+
+            $.ajax({
+                url: '/Statistical/GetStatistical_Productc',
+                type: 'GET',
+                data: { fromDate: '', toDate: '' },
+                data1: { fromDate: '', toDate: '' },
+                success: function (rs) {
+                    load_data(rs.Data, rs.Data1);
+                }
+            });
+
+
+        })
+
+        $('body').on('click', '.btn.btn-info.btn-flat.huydon', function () {
+
+            var ngaydau = $('#ngaydau').val();
+            var ngaycuoi = $('#ngaycuoi').val();
+
+            $.ajax({
+                url: '/Statistical/GetStatistical_Producth',
+                type: 'GET',
+                data: { fromDate: '', toDate: '' },
+                data1: { fromDate: '', toDate: '' },
+                success: function (rs) {
+                    load_data(rs.Data, rs.Data1);
                 }
             });
 
 
         })
         // hiển thị danh sách for
-        function load_data(data,data1) {
+        function load_data(data, data1) {
             var strHtml = "";
             $.each(data, function (i, item) {
                 strHtml += "<tr>";
                 strHtml += "<td>" + (i + 1) + "</td>";
-                strHtml += "<td>" + item.orderDetail_ProductId + "</td>";
                 strHtml += "<td>" + item.product_Title + "</td>";
                 strHtml += "<td>" + item.orderDetail_Quantity + "</td>";
                 strHtml += "<td>" + item.product_Quantity + "</td>";
-                $.each(data1, function(o,item1){
-                        if (item.orderDetail_ProductId == item1.orderDetail_ProductId)
-                            {
-                                
-                    strHtml += "<td>" + item1.Input_Quantity + "</td>";}
-                    
-                })
+                $.each(data1, function (o, item1) {
+                    if (item.orderDetail_ProductId == item1.orderDetail_ProductId) {
+
+                        strHtml += "<td>" + item1.Input_Quantity + "</td>";
+                    }
+
+                })                
                 strHtml += "<td>" + item.product_Price + "</td>";
                 strHtml += "<td>" + item.product_OriginalPrice + "</td>";
-                strHtml += "<td>" + item.LoiNhuan + "</td>";
                 strHtml += "</tr>";
             });
-           
+
             $('#load_data').html(strHtml);
         }
     </script>
