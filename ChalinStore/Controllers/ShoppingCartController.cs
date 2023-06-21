@@ -1,16 +1,16 @@
-﻿using ChalinStore.Models.EF;
-using ChalinStore.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ChalinStore.Models;
+using ChalinStore.Models.EF;
 using ChalinStore.Models.Payments;
 
 namespace ChalinStore.Controllers
 {
-   public class ShoppingCartController : Controller
+    public class ShoppingCartController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: ShoppingCart

@@ -3609,6 +3609,12 @@
     <Content Include="Uploads\_thumbs\Images\sanpham\single_3_thumb.jpg" />
     <Content Include="Uploads\_thumbs\Images\sanpham\slider_1.jpg" />
     <Content Include="Uploads\_thumbs\Images\setting\product_6.png" />
+    <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_Item_Cart.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_Item_ThanhToan.cshtml" />
     <Content Include="Views\ShoppingCart\VnpayReturn.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -3655,12 +3661,6 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Products\Detail.cshtml" />
     <Content Include="Views\Products\ProductCategory.cshtml" />
-    <Content Include="Views\ShoppingCart\Index.cshtml" />
-    <Content Include="Views\ShoppingCart\Partial_Item_Cart.cshtml" />
-    <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
-    <Content Include="Views\ShoppingCart\Partial_Item_ThanhToan.cshtml" />
-    <Content Include="Views\ShoppingCart\Partial_CheckOut.cshtml" />
-    <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
     <Content Include="Views\Home\Refresh.cshtml" />
     <Content Include="Views\News\Partial_News_Home.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
