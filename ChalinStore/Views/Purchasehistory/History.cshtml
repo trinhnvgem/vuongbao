@@ -1,42 +1,92 @@
-@model System.Collections.Generic.List<ChalinStore.Models.EF.Order>
+@model IEnumerable<ChalinStore.Models.EF.Order>
+
 @{
-    ViewData["Title"] = $"Book list ({Model.Count()} items)";
+    ViewBag.Title = "History";
 }
-<table class="table table-hover table-sm">
-   <thead>
-                       <tr>
-                           <th>#</th>
-                           <th>Mã đơn hàng</th>
-                           <th>Tên Khách hàng</th>
-                           <th>Phone</th>
-                           <th>Tiền</th>
-                           <th>Trạng thái</th>
-                           <th>Ngày tạo</th>
-                           <th></th>
-                       </tr>
-                   </thead>
-  <tbody>
-                      @if (Model != null && Model.Any())
-                      {
-                          var i = 1;
-                          foreach (var item in Model)
-                          {
-                              <tr>
-                                  <td>@i</td>
-                                  <td>@item.Code</td>
-                                  <td>@item.CustomerName</td>
-                                  <td>@item.Phone</td>
-                                  <td>@ChalinStore.Common.Common.FormatNumber(item.TotalAmount, 0)</td>
-                                  <td>@(item.TypePayment == 1 ? "Chờ thành toán":(item.TypePayment == 2?"Đã thanh toán":"Huỷ thanh toán"))</td>
-                                  <td>@item.CreatedDate.ToString("yyyy-MM-dd")</td>
-                                  <td>
-                                      <a href="/admin/order/view/@item.Id" class="btn btn-sm btn-success">Xem</a>
-                                      <a href="#" class="btn btn-sm btn-danger btnCapNhat" data-id="@item.Id">Cập nhật</a>
-                                  </td>
-                              </tr>
-                              i++;
-                          }
-                      }
-                  </tbody>
+
+<h2>History</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypePayment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modifiedby)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypePayment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modifiedby)
+        </td>
+    </tr>
+}
 
 </table>
