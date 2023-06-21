@@ -61,8 +61,6 @@
     });
 });
 
-
-
 function ShowCount() {
     $.ajax({
         url: '/shoppingcart/ShowCount',

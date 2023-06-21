@@ -208,12 +208,17 @@ namespace ChalinStore.Controllers
                         var url = UrlPayment(req.TypePaymentVN, order.Code);
                         code = new { Success = true, Code = req.TypePayment, Url = url };
                     }
-
                     //code = new { Success = true, Code = 1, Url = url };
                     //return RedirectToAction("CheckOutSuccess");
                 }
             }
-            return Json(code);
+
+            if (req.TypePayment == 2)
+            {
+                return Redirect(code.Url); 
+            }
+            return RedirectToAction("CheckOutSuccess");
+           
         }
 
         [HttpPost]
