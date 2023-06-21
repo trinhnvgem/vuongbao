@@ -31,10 +31,10 @@ namespace ChalinStore.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult Details_2()
+        /*public ActionResult Details_2()
         {
             return View();
-        }
+        }*/
 
         // thống kê biểu đồ
         [HttpGet]

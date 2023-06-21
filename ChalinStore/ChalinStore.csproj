@@ -206,6 +206,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\PurchasehistoryController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -3612,6 +3613,7 @@
     <Content Include="Uploads\_thumbs\Images\sanpham\single_3_thumb.jpg" />
     <Content Include="Uploads\_thumbs\Images\sanpham\slider_1.jpg" />
     <Content Include="Uploads\_thumbs\Images\setting\product_6.png" />
+    <Content Include="Views\Purchasehistory\History.cshtml" />
     <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
     <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
