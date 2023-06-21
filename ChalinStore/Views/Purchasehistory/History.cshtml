@@ -1,0 +1,42 @@
+@model System.Collections.Generic.List<ChalinStore.Models.EF.Order>
+@{
+    ViewData["Title"] = $"Book list ({Model.Count()} items)";
+}
+<table class="table table-hover table-sm">
+   <thead>
+                       <tr>
+                           <th>#</th>
+                           <th>Mã đơn hàng</th>
+                           <th>Tên Khách hàng</th>
+                           <th>Phone</th>
+                           <th>Tiền</th>
+                           <th>Trạng thái</th>
+                           <th>Ngày tạo</th>
+                           <th></th>
+                       </tr>
+                   </thead>
+  <tbody>
+                      @if (Model != null && Model.Any())
+                      {
+                          var i = 1;
+                          foreach (var item in Model)
+                          {
+                              <tr>
+                                  <td>@i</td>
+                                  <td>@item.Code</td>
+                                  <td>@item.CustomerName</td>
+                                  <td>@item.Phone</td>
+                                  <td>@ChalinStore.Common.Common.FormatNumber(item.TotalAmount, 0)</td>
+                                  <td>@(item.TypePayment == 1 ? "Chờ thành toán":(item.TypePayment == 2?"Đã thanh toán":"Huỷ thanh toán"))</td>
+                                  <td>@item.CreatedDate.ToString("yyyy-MM-dd")</td>
+                                  <td>
+                                      <a href="/admin/order/view/@item.Id" class="btn btn-sm btn-success">Xem</a>
+                                      <a href="#" class="btn btn-sm btn-danger btnCapNhat" data-id="@item.Id">Cập nhật</a>
+                                  </td>
+                              </tr>
+                              i++;
+                          }
+                      }
+                  </tbody>
+
+</table>
